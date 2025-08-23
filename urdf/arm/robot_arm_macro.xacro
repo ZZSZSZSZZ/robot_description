@@ -1,0 +1,149 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name="arm_link_with_sc" params="name arm_kinematics_link:='' arm_inertials:=^">
+    <link name="${arm_prefix}${name}">
+      <visual name="${arm_prefix}${name}_visual">
+        <xacro:arm_kinematics_link name="${arm_direction}_${name}" config="${arm_kinematics_link}" />
+        <geometry>
+          <mesh filename="package://robot_description/meshes/arm/visual/${arm_direction}_${name}.STL" />
+        </geometry>
+        <material name="White">
+          <color rgba="1.0 1.0 1.0 1.0" />
+        </material>
+      </visual>
+      <collision name="${arm_prefix}${name}_collision">
+        <xacro:arm_kinematics_link name="${arm_direction}_${name}" config="${arm_kinematics_link}" />
+        <geometry>
+          <mesh filename="package://robot_description/meshes/arm/collision/${arm_direction}_${name}.STL" />
+        </geometry>
+      </collision>
+      <xacro:arm_inertials name="${arm_direction}_${name}" config="${arm_inertials}" />
+    </link>
+  </xacro:macro>
+
+  <xacro:macro name="arm_limits" params="name config">
+    <xacro:property name="arm_limits" value="${config[name]['limit']}" />
+    <limit
+      lower="${arm_limits.lower}"
+      upper="${arm_limits.upper}"
+      effort="${arm_limits.effort}"
+      velocity="${arm_limits.velocity}" />
+  </xacro:macro>
+
+  <xacro:macro name="arm_inertials" params="name config">
+    <xacro:unless value="${name in arm_inertials}">
+      ${xacro.warning('No arm inertia properties defined for: ' + name)}
+    </xacro:unless>
+    <xacro:if value="${name in arm_inertials}">
+      <xacro:property name="arm_inertials" value="${config[name]}" lazy_eval="false" />
+      <inertial>
+        <origin
+          xyz="${arm_inertials.origin.xyz}"
+          rpy="${arm_inertials.origin.rpy}" />
+        <mass value="${arm_inertials.mass}" />
+        <xacro:if value="${'inertia' in arm_inertials}">
+          <xacro:property name="inertia" value="${arm_inertials.inertia}" />
+          <inertia ixx="${inertia.xx}" ixy="${inertia.xy}" ixz="${inertia.xz}"
+            iyy="${inertia.yy}" iyz="${inertia.yz}" izz="${inertia.zz}" />
+        </xacro:if>
+      </inertial>
+    </xacro:if>
+  </xacro:macro>
+
+  <xacro:macro name="arm_kinematics" params="name config">
+    <xacro:property name="arm_kinematics" value="${config[name]['kinematic']}" lazy_eval="false" />
+    <origin
+      xyz="${arm_kinematics.xyz}"
+      rpy="${arm_kinematics.rpy}" />
+  </xacro:macro>
+
+  <xacro:macro name="arm_kinematics_link" params="name config">
+    <xacro:property name="arm_kinematics_link" value="${config[name]['kinematic']}"
+      lazy_eval="false" />
+    <origin
+      xyz="${arm_kinematics_link.xyz}"
+      rpy="${arm_kinematics_link.rpy}" />
+      
+  </xacro:macro>
+
+  <xacro:macro name="transmission-openarm-state" params="arm_type:=fer">
+    <transmission name="${arm_direction}_openarm_state">
+      <type>openarm_hw/openarmStateInterface</type>
+      <joint name="${arm_direction}_joint1">
+        <hardwareInterface>openarm_hw/openarmStateInterface</hardwareInterface>
+      </joint>
+      <joint name="${arm_direction}_joint2">
+        <hardwareInterface>openarm_hw/openarmStateInterface</hardwareInterface>
+      </joint>
+      <joint name="${arm_direction}_joint3">
+        <hardwareInterface>openarm_hw/openarmStateInterface</hardwareInterface>
+      </joint>
+      <joint name="${arm_direction}_joint4">
+        <hardwareInterface>openarm_hw/openarmStateInterface</hardwareInterface>
+      </joint>
+      <joint name="${arm_direction}_joint5">
+        <hardwareInterface>openarm_hw/openarmStateInterface</hardwareInterface>
+      </joint>
+      <joint name="${arm_direction}_joint6">
+        <hardwareInterface>openarm_hw/openarmStateInterface</hardwareInterface>
+      </joint>
+      <joint name="${arm_direction}_joint7">
+        <hardwareInterface>openarm_hw/openarmStateInterface</hardwareInterface>
+      </joint>
+
+      <actuator name="${arm_direction}_motor1">
+        <hardwareInterface>openarm_hw/openarmStateInterface</hardwareInterface>
+      </actuator>
+      <actuator name="${arm_direction}_motor2">
+        <hardwareInterface>openarm_hw/openarmStateInterface</hardwareInterface>
+      </actuator>
+      <actuator name="${arm_direction}_motor3">
+        <hardwareInterface>openarm_hw/openarmStateInterface</hardwareInterface>
+      </actuator>
+      <actuator name="${arm_direction}_motor4">
+        <hardwareInterface>openarm_hw/openarmStateInterface</hardwareInterface>
+      </actuator>
+      <actuator name="${arm_direction}_motor5">
+        <hardwareInterface>openarm_hw/openarmStateInterface</hardwareInterface>
+      </actuator>
+      <actuator name="${arm_direction}_motor6">
+        <hardwareInterface>openarm_hw/openarmStateInterface</hardwareInterface>
+      </actuator>
+      <actuator name="${arm_direction}_motor7">
+        <hardwareInterface>openarm_hw/openarmStateInterface</hardwareInterface>
+      </actuator>
+    </transmission>
+  </xacro:macro>
+
+  <xacro:macro name="transmission-openarm-model"
+    params="arm_type:=v10 root:=v10_joint1 tip:=v10_joint7">
+    <transmission name="${arm_direction}_openarm_model">
+      <type>openarm_hw/openarmModelInterface</type>
+      <joint name="${root}">
+        <role>root</role>
+        <hardwareInterface>openarm_hw/openarmModelInterface</hardwareInterface>
+      </joint>
+      <joint name="${tip}">
+        <role>tip</role>
+        <hardwareInterface>openarm_hw/openarmModelInterface</hardwareInterface>
+      </joint>
+      <actuator name="${root}_motor_root">
+        <hardwareInterface>openarm_hw/openarmModelInterface</hardwareInterface>
+      </actuator>
+      <actuator name="${tip}_motor_tip">
+        <hardwareInterface>openarm_hw/openarmModelInterface</hardwareInterface>
+      </actuator>
+    </transmission>
+  </xacro:macro>
+
+  <xacro:macro name="inertia-cylinder" params="mass radius h">
+    <inertial>
+      <mass value="${mass}" />
+      <inertia ixx="${1./12 * mass * (3 * radius**2 + h**2)}" ixy="0" ixz="0"
+        iyy="${1./12 * mass * (3 * radius**2 + h**2)}" iyz="0"
+        izz="${1./2  * mass * radius**2}" />
+    </inertial>
+  </xacro:macro>
+
+</robot>

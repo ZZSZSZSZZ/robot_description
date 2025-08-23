@@ -1,0 +1,77 @@
+base_link:
+  origin:
+    xyz: 0.015311 -0.0012957 0.10807
+    rpy: 0.0 0.0 0.0
+  mass: 28.351
+  inertia:
+    xx: 0.0
+    xy: 0.0
+    xz: 0.0
+    yy: 0.0
+    yz: 0.0
+    zz: 0.0
+
+left_wheel_link:
+  origin:
+    xyz: -1.4357E-06 -4.1099E-06 0.027651
+    rpy: 0.0 0.0 0.0
+  mass: 13.89
+  inertia:
+    xx: 0.0
+    xy: 0.0
+    xz: 0.0
+    yy: 0.0
+    yz: 0.0
+    zz: 0.0
+
+right_wheel_link:
+  origin:
+    xyz: -3.2498E-06 2.895E-06 0.027651
+    rpy: 0.0 0.0 0.0
+  mass: 0.2468
+  inertia:
+    xx: 0.0
+    xy: 0.0
+    xz: 0.0
+    yy: 0.0
+    yz: 0.0
+    zz: 0.0
+
+link1:
+  origin:
+    xyz: 2.8669E-05 -4.4815E-06 0.14498
+    rpy: 0.0 0.0 0.0
+  mass: 5.8296
+  inertia:
+    xx: 0.0
+    xy: 0.0
+    xz: 0.0
+    yy: 0.0
+    yz: 0.0
+    zz: 0.0
+
+link2:
+  origin:
+    xyz: 5.5427E-09 -0.00036567 0.12499
+    rpy: 0.0 0.0 0.0
+  mass: 4.4176
+  inertia:
+    xx: 0.0
+    xy: 0.0
+    xz: 0.0
+    yy: 0.0
+    yz: 0.0
+    zz: 0.0
+
+link3:
+  origin:
+    xyz: 0.0022529 0.00033194 0.24253
+    rpy: 0.0 0.0 0.0
+  mass: 11.225
+  inertia:
+    xx: 0.0
+    xy: 0.0
+    xz: 0.0
+    yy: 0.0
+    yz: 0.0
+    zz: 0.0

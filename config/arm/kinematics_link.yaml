@@ -1,0 +1,70 @@
+left_link1:
+  kinematic:
+    xyz: 0.0 0.0 0.0
+    rpy: 0.0 0.0 0.0
+
+left_link2:
+  kinematic:
+    xyz: 0.0 0.0 0.0
+    rpy: 0.0 0.0 0.0
+
+left_link3:
+  kinematic:
+    xyz: 0.0 0.0 0.0
+    rpy: 0.0 0.0 0.0
+
+left_link4:
+  kinematic:
+    xyz: 0.0 0.0 0.0
+    rpy: 0.0 0.0 0.0
+
+left_link5:
+  kinematic:
+    xyz: 0.0 0.0 0.0
+    rpy: 0.0 0.0 0.0
+
+left_link6:
+  kinematic:
+    xyz: 0.0 0.0 0.0
+    rpy: 0.0 0.0 0.0
+
+left_link7:
+  kinematic:
+    xyz: 0.0 0.0 0.0
+    rpy: 0.0 0.0 0.0
+
+
+right_link1:
+  kinematic:
+    xyz: 0.0 0.0 0.0
+    rpy: 0.0 0.0 0.0
+
+right_link2:
+  kinematic:
+    xyz: 0.0 0.0 0.0
+    rpy: 0.0 0.0 0.0
+
+right_link3:
+  kinematic:
+    xyz: 0.0 0.0 0.0
+    rpy: 0.0 0.0 0.0
+
+right_link4:
+  kinematic:
+    xyz: 0.0 0.0 0.0
+    rpy: 0.0 0.0 0.0
+
+right_link5:
+  kinematic:
+    xyz: 0.0 0.0 0.0
+    rpy: 0.0 0.0 0.0
+
+right_link6:
+  kinematic:
+    xyz: 0.0 0.0 0.0
+    rpy: 0.0 0.0 0.0
+
+right_link7:
+  kinematic:
+    xyz: 0.0 0.0 0.0
+    rpy: 0.0 0.0 0.0

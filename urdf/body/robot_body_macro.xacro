@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name="body_link_with_sc" params="name body_kinematics_link:='' body_inertials:=^">
+    <link name="${body_prefix}${name}">
+      <visual name="${body_prefix}${name}_visual">
+        <xacro:body_kinematics name="${name}" config="${body_kinematics_link}" />
+        <geometry>
+          <mesh filename="package://robot_description/meshes/body/visual/${name}.STL" />
+        </geometry>
+        <material name="White">
+          <color rgba="1.0 1.0 1.0 1.0" />
+        </material>
+      </visual>
+      <collision name="${body_prefix}${name}_collision">
+        <xacro:body_kinematics name="${name}" config="${body_kinematics_link}" />
+        <geometry>
+          <mesh filename="package://robot_description/meshes/body/collision/${name}.STL" />
+        </geometry>
+      </collision>
+      <xacro:body_inertials name="${name}" config="${body_inertials}" />
+    </link>
+  </xacro:macro>
+
+  <xacro:macro name="body_limits" params="name config">
+    <xacro:property name="body_limits" value="${config[name]['limit']}" />
+    <limit
+      lower="${body_limits.lower}"
+      upper="${body_limits.upper}"
+      effort="${body_limits.effort}"
+      velocity="${body_limits.velocity}" />
+  </xacro:macro>
+
+  <xacro:macro name="body_inertials" params="name config">
+    <xacro:unless value="${name in body_inertials}">
+      ${xacro.warning('No body inertia properties defined for: ' + name)}
+    </xacro:unless>
+    <xacro:if value="${name in body_inertials}">
+      <xacro:property name="body_inertials" value="${config[name]}" lazy_eval="false" />
+      <inertial>
+        <origin
+          xyz="${body_inertials.origin.xyz}"
+          rpy="${body_inertials.origin.rpy}" />
+        <mass value="${body_inertials.mass}" />
+        <xacro:if value="${'inertia' in body_inertials}">
+          <xacro:property name="inertia" value="${body_inertials.inertia}" />
+          <inertia ixx="${inertia.xx}" ixy="${inertia.xy}" ixz="${inertia.xz}"
+            iyy="${inertia.yy}" iyz="${inertia.yz}" izz="${inertia.zz}" />
+        </xacro:if>
+      </inertial>
+    </xacro:if>
+  </xacro:macro>
+
+  <xacro:macro name="body_kinematics" params="name config">
+    <xacro:property name="body_kinematics" value="${config[name]['kinematic']}" lazy_eval="false" />
+    <origin xyz="${body_kinematics.xyz}" 
+      rpy="${body_kinematics.rpy}" />
+  </xacro:macro>
+
+  <xacro:macro name="body_kinematics_link" params="name config">
+    <xacro:property name="body_kinematics_link" value="${config[name]['kinematic']}"
+      lazy_eval="false" />
+    <origin xyz="${body_kinematics_link.xyz}" 
+      rpy="${body_kinematics_link.rpy}" />
+  </xacro:macro>
+
+</robot>

@@ -1,0 +1,27 @@
+left_left_finger:
+  limit:
+    lower: -0.2
+    upper: 0
+    velocity: 100
+    effort: 100
+
+left_right_finger:
+  limit:
+    lower: -0.2
+    upper: 0
+    velocity: 100
+    effort: 100
+
+right_left_finger:
+  limit:
+    lower: -0.2
+    upper: 0
+    velocity: 100
+    effort: 100
+
+right_right_finger:
+  limit:
+    lower: -0.2
+    upper: 0
+    velocity: 100
+    effort: 100

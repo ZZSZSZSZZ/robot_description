@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robot">
+
+  <xacro:include filename="$(find robot_description)/urdf/body/robot_body.xacro" />
+  <xacro:include filename="$(find robot_description)/urdf/body/robot_body_macro.xacro" />
+  <xacro:include filename="$(find robot_description)/urdf/arm/robot_arm.xacro" />
+  <xacro:include filename="$(find robot_description)/urdf/arm/robot_arm_macro.xacro" />
+  <xacro:include filename="$(find robot_description)/urdf/hand/robot_hand.xacro" />
+  <xacro:include filename="$(find robot_description)/urdf/hand/robot_hand_macro.xacro" />
+  <xacro:include filename="$(find robot_description)/urdf/ros2_control/ros2_control.xacro" />
+
+  <xacro:macro name="robot"
+    params="
+      body_limits
+      body_inertials
+      body_kinematics
+      body_kinematics_link
+      arm_limits
+      arm_inertials
+      arm_kinematics
+      arm_kinematics_link
+      hand_limits
+      hand_inertials
+      hand_kinematics
+      hand_kinematics_link
+      ros2_control:=false
+      can_interface:=''
+      use_fake_hardware:=false
+      fake_sensor_commands:=false
+      left_can_interface:='can1'
+      right_can_interface:='can0'
+      ">
+
+    <!-- body -->
+    <xacro:robot_body
+      body_limits="${body_limits}"
+      body_inertials="${body_inertials}"
+      body_kinematics="${body_kinematics}"
+      body_kinematics_link="${body_kinematics_link}" />
+
+    <!-- left arm -->
+    <xacro:robot_arm
+      arm_direction="left"
+      arm_connected_to="body_link3"
+      arm_limits="${arm_limits}"
+      arm_inertials="${arm_inertials}"
+      arm_kinematics="${arm_kinematics}"
+      arm_kinematics_link="${arm_kinematics_link}" />
+
+    <!-- right arm -->
+    <xacro:robot_arm
+      arm_direction="right"
+      arm_connected_to="body_link3"
+      arm_limits="${arm_limits}"
+      arm_inertials="${arm_inertials}"
+      arm_kinematics="${arm_kinematics}"
+      arm_kinematics_link="${arm_kinematics_link}" />
+
+    <!-- left hand -->
+    <xacro:robot_hand
+      arm_direction="left"
+      hand_connected_to="arm_left_link8"
+      hand_limits="${hand_limits}"
+      hand_inertials="${hand_inertials}"
+      hand_kinematics="${hand_kinematics}"
+      hand_kinematics_link="${hand_kinematics_link}" />
+
+    <!-- right_hand -->
+    <xacro:robot_hand
+      arm_direction="right"
+      hand_connected_to="arm_right_link8"
+      hand_limits="${hand_limits}"
+      hand_inertials="${hand_inertials}"
+      hand_kinematics="${hand_kinematics}"
+      hand_kinematics_link="${hand_kinematics_link}" />
+
+    <!-- ros2_control hardware interfaces -->
+    <!-- <xacro:openarm_bimanual_ros2_control
+      arm_type="${arm_type}"
+      left_can_interface="${left_can_interface}"
+      right_can_interface="${right_can_interface}"
+      use_fake_hardware="${use_fake_hardware}"
+      fake_sensor_commands="${fake_sensor_commands}" /> -->
+
+  </xacro:macro>
+
+  <xacro:robot
+    body_limits="${xacro.load_yaml('$(find robot_description)/config/body/limits.yaml')}"
+    body_inertials="${xacro.load_yaml('$(find robot_description)/config/body/inertials.yaml')}"
+    body_kinematics="${xacro.load_yaml('$(find robot_description)/config/body/kinematics.yaml')}"
+    body_kinematics_link="${xacro.load_yaml('$(find robot_description)/config/body/kinematics_link.yaml')}"
+    arm_limits="${xacro.load_yaml('$(find robot_description)/config/arm/limits.yaml')}"
+    arm_inertials="${xacro.load_yaml('$(find robot_description)/config/arm/inertials.yaml')}"
+    arm_kinematics="${xacro.load_yaml('$(find robot_description)/config/arm/kinematics.yaml')}"
+    arm_kinematics_link="${xacro.load_yaml('$(find robot_description)/config/arm/kinematics_link.yaml')}"
+    hand_limits="${xacro.load_yaml('$(find robot_description)/config/hand/limits.yaml')}"
+    hand_inertials="${xacro.load_yaml('$(find robot_description)/config/hand/inertials.yaml')}"
+    hand_kinematics="${xacro.load_yaml('$(find robot_description)/config/hand/kinematics.yaml')}"
+    hand_kinematics_link="${xacro.load_yaml('$(find robot_description)/config/hand/kinematics_link.yaml')}" 
+    />
+</robot>

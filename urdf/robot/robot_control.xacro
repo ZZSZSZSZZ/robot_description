@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robot">
+
+  <xacro:include filename="$(find robot_description)/urdf/robot/robot.xacro" />
+
+  <xacro:robot
+    body_limits="${xacro.load_yaml('$(find robot_description)/config/boby/limits.yaml')}"
+    body_inertials="${xacro.load_yaml('$(find robot_description)/config/boby/inertials.yaml')}"
+    body_kinematics="${xacro.load_yaml('$(find robot_description)/config/boby/kinematics.yaml')}"
+    body_kinematics_link="${xacro.load_yaml('$(find robot_description)/config/boby/kinematics_link.yaml')}"
+    arm_limits="${xacro.load_yaml('$(find robot_description)/config/arm/limits.yaml')}"
+    arm_inertials="${xacro.load_yaml('$(find robot_description)/config/arm/inertials.yaml')}"
+    arm_kinematics="${xacro.load_yaml('$(find robot_description)/config/arm/kinematics.yaml')}"
+    arm_kinematics_link="${xacro.load_yaml('$(find robot_description)/config/arm/kinematics_link.yaml')}"
+    hand_limits="${xacro.load_yaml('$(find robot_description)/config/hand/limits.yaml')}"
+    hand_inertials="${xacro.load_yaml('$(find robot_description)/config/hand/inertials.yaml')}"
+    hand_kinematics="${xacro.load_yaml('$(find robot_description)/config/hand/kinematics.yaml')}"
+    hand_kinematics_link="${xacro.load_yaml('$(find robot_description)/config/hand/kinematics_link.yaml')}" />
+
+</robot>

@@ -1,0 +1,77 @@
+left_hand:
+  origin:
+    xyz: 0.0 0.0 0.0
+    rpy: 0.0 0.0 0.0
+  mass: 0.3
+  inertia:
+    xx: 0.0001
+    yy: 0.00025
+    zz: 0.00017
+    xy: 1e-06
+    xz: 1e-06
+    yz: 1e-06
+
+right_hand:
+  origin:
+    xyz: 0.0 0.0 0.0
+    rpy: 0.0 0.0 0.0
+  mass: 0.3
+  inertia:
+    xx: 0.0001
+    yy: 0.00025
+    zz: 0.00017
+    xy: 1e-06
+    xz: 1e-06
+    yz: 1e-06
+
+left_left_finger:
+  origin:
+    xyz: 0.0 0.0 0.0
+    rpy: 0.0 0.0 0.0
+  mass: 0.03602545343277134
+  inertia:
+    xx: 2.3749999999999997e-06
+    yy: 2.3749999999999997e-06
+    zz: 7.5e-07
+    xy: 1e-06
+    xz: 1e-06
+    yz: 1e-06
+
+left_right_finger:
+  origin:
+    xyz: 0.0 0.0 0.0
+    rpy: 0.0 0.0 0.0
+  mass: 0.03602545343277134
+  inertia:
+    xx: 2.3749999999999997e-06
+    yy: 2.3749999999999997e-06
+    zz: 7.5e-07
+    xy: 1e-06
+    xz: 1e-06
+    yz: 1e-06
+
+right_left_finger:
+  origin:
+    xyz: 0.0 0.0 0.0
+    rpy: 0.0 0.0 0.0
+  mass: 0.03602545343277134
+  inertia:
+    xx: 2.3749999999999997e-06
+    yy: 2.3749999999999997e-06
+    zz: 7.5e-07
+    xy: 1e-06
+    xz: 1e-06
+    yz: 1e-06
+
+right_right_finger:
+  origin:
+    xyz: 0.0 0.0 0.0
+    rpy: 0.0 0.0 0.0
+  mass: 0.03602545343277134
+  inertia:
+    xx: 2.3749999999999997e-06
+    yy: 2.3749999999999997e-06
+    zz: 7.5e-07
+    xy: 1e-06
+    xz: 1e-06
+    yz: 1e-06

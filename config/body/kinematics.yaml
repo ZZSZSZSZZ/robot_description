@@ -1,0 +1,24 @@
+left_wheel_link:
+  kinematic:
+    xyz: 0.039547 0.1414 0.017
+    rpy: -1.5708 0 0
+
+right_wheel_link:
+  kinematic:
+    xyz: 0.039547 -0.1414 0.017
+    rpy: 1.5708 0 0
+
+link1:
+  kinematic:
+    xyz: 0.039518 0 0.35623
+    rpy: 0.0 0.0 0.0
+
+link2:
+  kinematic:
+    xyz: 2.8673E-05 0.00036107 0.29
+    rpy: 0.0 0.0 0.0
+
+link3:
+  kinematic:
+    xyz: -2.5089E-05 -0.00036165 0.25
+    rpy: 0.0 0.0 0.0

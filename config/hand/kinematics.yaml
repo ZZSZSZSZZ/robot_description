@@ -1,0 +1,19 @@
+left_left_finger:
+  kinematic:
+    xyz: -0.035818 -0.0075003 0.076937
+    rpy: -1.5708 0 3.1416
+
+left_right_finger:
+  kinematic:
+    xyz: 0.035818 -0.0075003 0.076937
+    rpy: 1.5708 0 0
+
+right_left_finger:
+  kinematic:
+    xyz: 0.035818 0.0075003 0.076937
+    rpy: -1.5708 0 0
+
+right_right_finger:
+  kinematic:
+    xyz: -0.035818 0.0075003 0.076937
+    rpy: 1.5708 0 3.1416

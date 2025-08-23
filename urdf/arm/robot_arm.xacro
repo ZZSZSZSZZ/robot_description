@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robot_arm">
+
+  <xacro:include filename="$(find robot_description)/urdf/arm/robot_arm_macro.xacro" />
+
+  <xacro:macro name="robot_arm"
+    params="arm_direction:='' arm_connected_to:='base' arm_limits arm_inertials arm_kinematics arm_kinematics_link">
+
+    <!-- 前缀定义 -->
+    <xacro:property name="arm_prefix" value="arm_${arm_direction}_" />
+
+    <!-- link1 -->
+    <xacro:arm_link_with_sc name="link1" arm_kinematics_link="${arm_kinematics_link}"
+      arm_inertials="${arm_inertials}" />
+
+    <joint name="${arm_prefix}joint1" type="revolute">
+      <xacro:arm_kinematics name="${arm_direction}_link1" config="${arm_kinematics}" />
+      <parent link="${arm_connected_to}" />
+      <child link="${arm_prefix}link1" />
+      <axis xyz="0 0 1" />
+      <xacro:arm_limits name="${arm_direction}_link1" config="${arm_limits}" />
+    </joint>
+
+    <!-- link2 -->
+    <xacro:arm_link_with_sc name="link2" arm_kinematics_link="${arm_kinematics_link}"
+      arm_inertials="${arm_inertials}" />
+
+    <joint name="${arm_prefix}joint2" type="revolute">
+      <xacro:arm_kinematics name="${arm_direction}_link2" config="${arm_kinematics}" />
+      <parent link="${arm_prefix}link1" />
+      <child link="${arm_prefix}link2" />
+      <axis xyz="0 0 -1" />
+      <xacro:arm_limits name="${arm_direction}_link2" config="${arm_limits}" />
+    </joint>
+
+    <!-- link3 -->
+    <xacro:arm_link_with_sc name="link3" arm_kinematics_link="${arm_kinematics_link}"
+      arm_inertials="${arm_inertials}" />
+
+    <joint name="${arm_prefix}joint3" type="revolute">
+      <xacro:arm_kinematics name="${arm_direction}_link3" config="${arm_kinematics}" />
+      <parent link="${arm_prefix}link2" />
+      <child link="${arm_prefix}link3" />
+      <axis xyz="0 0 -1" />
+      <xacro:arm_limits name="${arm_direction}_link3" config="${arm_limits}" />
+    </joint>
+
+    <!-- link4 -->
+    <xacro:arm_link_with_sc name="link4" arm_kinematics_link="${arm_kinematics_link}"
+      arm_inertials="${arm_inertials}" />
+
+    <joint name="${arm_prefix}joint4" type="revolute">
+      <xacro:arm_kinematics name="${arm_direction}_link4" config="${arm_kinematics}" />
+      <parent link="${arm_prefix}link3" />
+      <child link="${arm_prefix}link4" />
+      <axis xyz="0 0 -1" />
+      <xacro:arm_limits name="${arm_direction}_link4" config="${arm_limits}" />
+    </joint>
+
+    <!-- link5 -->
+    <xacro:arm_link_with_sc name="link5" arm_kinematics_link="${arm_kinematics_link}"
+      arm_inertials="${arm_inertials}" />
+
+    <joint name="${arm_prefix}joint5" type="revolute">
+      <xacro:arm_kinematics name="${arm_direction}_link5" config="${arm_kinematics}" />
+      <parent link="${arm_prefix}link4" />
+      <child link="${arm_prefix}link5" />
+      <axis xyz="0 0 -1" />
+      <xacro:arm_limits name="${arm_direction}_link5" config="${arm_limits}" />
+    </joint>
+
+    <!-- link6 -->
+    <xacro:arm_link_with_sc name="link6" arm_kinematics_link="${arm_kinematics_link}"
+      arm_inertials="${arm_inertials}" />
+
+    <joint name="${arm_prefix}joint6" type="revolute">
+      <xacro:arm_kinematics name="${arm_direction}_link6" config="${arm_kinematics}" />
+      <parent link="${arm_prefix}link5" />
+      <child link="${arm_prefix}link6" />
+      <axis xyz="0 0 -1" />
+      <xacro:arm_limits name="${arm_direction}_link6" config="${arm_limits}" />
+    </joint>
+
+    <!-- link7 -->
+    <xacro:arm_link_with_sc name="link7" arm_kinematics_link="${arm_kinematics_link}"
+      arm_inertials="${arm_inertials}" />
+
+    <joint name="${arm_prefix}joint7" type="revolute">
+      <xacro:arm_kinematics name="${arm_direction}_link7" config="${arm_kinematics}" />
+      <parent link="${arm_prefix}link6" />
+      <child link="${arm_prefix}link7" />
+      <axis xyz="0 0 -1" />
+      <xacro:arm_limits name="${arm_direction}_link7" config="${arm_limits}" />
+    </joint>
+
+    <!-- link8 -->
+    <link name="${arm_prefix}link8" />
+
+    <joint name="${arm_prefix}joint8" type="fixed">
+      <xacro:arm_kinematics name="${arm_direction}_link8" config="${arm_kinematics}" />
+      <parent link="${arm_prefix}link7" />
+      <child link="${arm_prefix}link8" />
+    </joint>
+
+  </xacro:macro>
+</robot>

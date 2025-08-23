@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name="configure_joint" params="joint_name initial_position">
+    <joint name="${joint_name}">
+      <command_interface name="position" />
+      <command_interface name="velocity" />
+      <command_interface name="effort" />
+
+      <state_interface name="position">
+        <param name="initial_value">${initial_position}</param>
+      </state_interface>
+
+      <state_interface name="velocity">
+        <param name="initial_value">0.0</param>
+      </state_interface>
+
+      <state_interface name="effort">
+        <param name="initial_value">0.0</param>
+      </state_interface>
+    </joint>
+  </xacro:macro>
+
+</robot>

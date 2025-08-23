@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robot_body">
+
+  <xacro:include filename="$(find robot_description)/urdf/body/robot_body_macro.xacro" />
+
+  <xacro:macro name="robot_body"
+    params="body_limits body_inertials body_kinematics body_kinematics_link">
+
+    <!-- 前缀定义 -->
+    <xacro:property name="body_prefix" default="body_" />
+
+    <!-- base_link -->
+    <xacro:body_link_with_sc name="base_link" body_kinematics_link="${body_kinematics_link}"
+      body_inertials="${body_inertials}" />
+
+    <!-- left_wheel_link -->
+    <xacro:body_link_with_sc name="left_wheel_link" body_kinematics_link="${body_kinematics_link}"
+      body_inertials="${body_inertials}" />
+
+    <joint name="left_wheel_joint" type="continuous">
+      <xacro:body_kinematics name="left_wheel_link" config="${body_kinematics}" />
+      <parent link="${body_prefix}base_link" />
+      <child link="${body_prefix}left_wheel_link" />
+      <axis xyz="0 0 1" />
+      <!-- <xacro:body_limits name="left_wheel_link" config="${body_limits}" /> -->
+    </joint>
+
+    <!-- right_wheel_link -->
+    <xacro:body_link_with_sc name="right_wheel_link" body_kinematics_link="${body_kinematics_link}"
+      body_inertials="${body_inertials}" />
+
+    <joint name="right_wheel_joint" type="continuous">
+      <xacro:body_kinematics name="right_wheel_link" config="${body_kinematics}" />
+      <parent link="${body_prefix}base_link" />
+      <child link="${body_prefix}right_wheel_link" />
+      <axis xyz="0 0 1" />
+      <!-- <xacro:body_limits name="right_wheel_link" config="${body_limits}" /> -->
+    </joint>
+
+    <!-- link1 -->
+    <xacro:body_link_with_sc name="link1" body_kinematics_link="${body_kinematics_link}"
+      body_inertials="${body_inertials}" />
+
+    <joint name="${body_prefix}joint1" type="prismatic">
+      <xacro:body_kinematics name="link1" config="${body_kinematics}" />
+      <parent link="${body_prefix}base_link" />
+      <child link="${body_prefix}link1" />
+      <axis xyz="0 0 -1" />
+      <xacro:body_limits name="link1" config="${body_limits}" />
+    </joint>
+
+    <!-- link2 -->
+    <xacro:body_link_with_sc name="link2" body_kinematics_link="${body_kinematics_link}"
+      body_inertials="${body_inertials}" />
+
+    <joint name="${body_prefix}joint2" type="prismatic">
+      <xacro:body_kinematics name="link2" config="${body_kinematics}" />
+      <parent link="${body_prefix}link1" />
+      <child link="${body_prefix}link2" />
+      <axis xyz="0 0 -1" />
+      <xacro:body_limits name="link2" config="${body_limits}" />
+      <mimic joint="${body_prefix}joint1" />
+    </joint>
+
+    <!-- link3 -->
+    <xacro:body_link_with_sc name="link3" body_kinematics_link="${body_kinematics_link}"
+      body_inertials="${body_inertials}" />
+
+    <joint name="${body_prefix}joint3" type="prismatic">
+      <xacro:body_kinematics name="link3" config="${body_kinematics}" />
+      <parent link="${body_prefix}link2" />
+      <child link="${body_prefix}link3" />
+      <axis xyz="0 0 1" />
+      <xacro:body_limits name="link3" config="${body_limits}" />
+      <mimic joint="${body_prefix}joint1" multiplier="-0.5" />
+    </joint>
+  </xacro:macro>
+
+</robot>
