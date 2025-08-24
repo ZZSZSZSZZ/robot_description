@@ -9,6 +9,10 @@
   <xacro:include filename="$(find robot_description)/urdf/hand/robot_hand_macro.xacro" />
   <xacro:include filename="$(find robot_description)/urdf/ros2_control/ros2_control.xacro" />
 
+  <xacro:arg name="use_fake_hardware" default="true" />
+  <xacro:arg name="left_can_interface" default="can0" />
+  <xacro:arg name="right_can_interface" default="can1" />
+
   <xacro:macro name="robot"
     params="
       body_limits
@@ -93,6 +97,9 @@
     hand_limits="${xacro.load_yaml('$(find robot_description)/config/hand/limits.yaml')}"
     hand_inertials="${xacro.load_yaml('$(find robot_description)/config/hand/inertials.yaml')}"
     hand_kinematics="${xacro.load_yaml('$(find robot_description)/config/hand/kinematics.yaml')}"
-    hand_kinematics_link="${xacro.load_yaml('$(find robot_description)/config/hand/kinematics_link.yaml')}" 
+    hand_kinematics_link="${xacro.load_yaml('$(find robot_description)/config/hand/kinematics_link.yaml')}"
+    use_fake_hardware="$(arg use_fake_hardware)"
+    left_can_interface="$(arg left_can_interface)"
+    right_can_interface="$(arg right_can_interface)"
     />
 </robot>
