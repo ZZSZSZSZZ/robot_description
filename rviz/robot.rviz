@@ -19,9 +19,9 @@ Visualization Manager:
       Value: true
     - Class: rviz_default_plugins/TF
       Name: TF
-      Value: true
+      Value: false
   Global Options:
-    Fixed Frame: map
+    Fixed Frame: body_base_link
     Frame Rate: 30
   Name: root
   Tools:

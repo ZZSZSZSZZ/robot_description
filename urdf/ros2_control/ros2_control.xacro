@@ -89,8 +89,6 @@
 
       <!-- body -->
       <xacro:configure_joint joint_name="body_joint1" initial_position="0.0" />
-      <xacro:configure_joint joint_name="body_joint2" initial_position="0.0" />
-      <xacro:configure_joint joint_name="body_joint3" initial_position="0.0" />
 
       <!-- differential -->
       <xacro:configure_joint joint_name="body_left_wheel_joint" initial_position="0.0" />

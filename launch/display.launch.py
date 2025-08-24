@@ -10,7 +10,7 @@ import xacro
 def generate_launch_description():
     package_name = 'robot_description'  # Replace with your package name
     urdf_file_name = 'robot.xacro'
-    rviz_config_file = 'urdf.rviz'
+    rviz_config_file = 'robot.rviz'
 
     rviz_config_path = os.path.join(get_package_share_directory(package_name), 'rviz', rviz_config_file)
     
