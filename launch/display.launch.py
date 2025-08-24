@@ -16,11 +16,9 @@ def generate_launch_description():
     
     urdf = os.path.join(
         get_package_share_directory(package_name),
-        'urdf', "robot",
-        urdf_file_name)
+        'urdf', "robot", urdf_file_name)
         
-    doc = xacro.parse(open(urdf))
-    xacro.process_doc(doc)
+    robot_description = xacro.process_file(urdf).toprettyxml(indent="  ")
    
     ld = LaunchDescription()
 
@@ -35,7 +33,7 @@ def generate_launch_description():
             executable='robot_state_publisher',
             name='robot_state_publisher',
             output='screen',
-            parameters=[{'robot_description': doc.toxml()}]
+            parameters=[{'robot_description': robot_description}]
     ))
 
     ld.add_action(Node(
@@ -58,7 +56,7 @@ def generate_launch_description():
         package='tf2_ros',
         executable='static_transform_publisher',
         name='static_transform_publisher',
-        arguments=['0', '0', '0', '0', '0', '0', 'map', 'base_link'],
+        arguments=['0', '0', '0', '0', '0', '0', 'map', 'body_base_link'],
     ))
 
     return ld
