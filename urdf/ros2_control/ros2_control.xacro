@@ -1,13 +1,14 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-  <xacro:include filename="$(find robot_description)/urdf/hand/robot_hand_macro.xacro" />
+  <xacro:include filename="$(find robot_description)/urdf/ros2_control/ros2_control_macro.xacro" />
 
-  <xacro:macro name="openarm_bimanual_ros2_control"
-    params="left_can_interface:=^|can1
-            right_can_interface:=^|can0
-            use_fake_hardware:=^|false
-            fake_sensor_commands:=^|false
+  <xacro:macro name="robot_ros2_control"
+    params="use_fake_hardware:=^|true
+            fake_sensor_commands:=^|true
+            left_can_interface:=^|can0
+            right_can_interface:=^|can1
+            body_can_interface:=^|can2
             can_fd:=^|true">
 
     <!-- Left Arm Hardware Interface -->
@@ -20,7 +21,7 @@
         </xacro:if>
         <xacro:unless value="${use_fake_hardware}">
           <!-- Modify it here to implement your own hardware interface -->
-          <plugin>openarm_hardware/OpenArm_v10HW</plugin>
+          <plugin>robot_hardware/robot_HW</plugin>
           <param name="can_interface">${left_can_interface}</param>
           <param name="can_fd">${can_fd}</param>
         </xacro:unless>
@@ -41,7 +42,7 @@
     </ros2_control>
 
     <!-- Right Arm Hardware Interface -->
-    <ros2_control name="openarm_right_hardware_interface" type="system">
+    <ros2_control name="robot_right_arm_hardware_interface" type="system">
       <hardware>
         <xacro:if value="${use_fake_hardware}">
           <plugin>fake_components/GenericSystem</plugin>
@@ -50,7 +51,7 @@
         </xacro:if>
         <xacro:unless value="${use_fake_hardware}">
           <!-- Modify it here to implement your own hardware interface -->
-          <plugin>openarm_hardware/OpenArm_v10HW</plugin>
+          <plugin>robot_hardware/robot_HW</plugin>
           <param name="can_interface">${right_can_interface}</param>
           <param name="can_fd">${can_fd}</param>
         </xacro:unless>
@@ -67,6 +68,33 @@
 
       <!-- hand -->
       <xacro:configure_joint joint_name="hand_right_right_finger_joint" initial_position="0.0" />
+
+    </ros2_control>
+
+    <!-- Body Hardware Interface -->
+    <ros2_control name="robot_body_hardware_interface" type="system">
+      <hardware>
+        <xacro:if value="${use_fake_hardware}">
+          <plugin>fake_components/GenericSystem</plugin>
+          <param name="fake_sensor_commands">${fake_sensor_commands}</param>
+          <param name="state_following_offset">0.0</param>
+        </xacro:if>
+        <xacro:unless value="${use_fake_hardware}">
+          <!-- Modify it here to implement your own hardware interface -->
+          <plugin>robot_hardware/robot_HW</plugin>
+          <param name="can_interface">${body_can_interface}</param>
+          <param name="can_fd">${can_fd}</param>
+        </xacro:unless>
+      </hardware>
+
+      <!-- body -->
+      <xacro:configure_joint joint_name="body_joint1" initial_position="0.0" />
+      <xacro:configure_joint joint_name="body_joint2" initial_position="0.0" />
+      <xacro:configure_joint joint_name="body_joint3" initial_position="0.0" />
+
+      <!-- differential -->
+      <xacro:configure_joint joint_name="body_left_wheel_joint" initial_position="0.0" />
+      <xacro:configure_joint joint_name="body_right_wheel_joint" initial_position="0.0" />
 
     </ros2_control>
 
