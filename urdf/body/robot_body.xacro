@@ -17,7 +17,7 @@
     <xacro:body_link_with_sc name="left_wheel_link" body_kinematics_link="${body_kinematics_link}"
       body_inertials="${body_inertials}" />
 
-    <joint name="left_wheel_joint" type="continuous">
+    <joint name="${body_prefix}left_wheel_joint" type="continuous">
       <xacro:body_kinematics name="left_wheel_link" config="${body_kinematics}" />
       <parent link="${body_prefix}base_link" />
       <child link="${body_prefix}left_wheel_link" />
@@ -29,7 +29,7 @@
     <xacro:body_link_with_sc name="right_wheel_link" body_kinematics_link="${body_kinematics_link}"
       body_inertials="${body_inertials}" />
 
-    <joint name="right_wheel_joint" type="continuous">
+    <joint name="${body_prefix}right_wheel_joint" type="continuous">
       <xacro:body_kinematics name="right_wheel_link" config="${body_kinematics}" />
       <parent link="${body_prefix}base_link" />
       <child link="${body_prefix}right_wheel_link" />
