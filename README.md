@@ -1,4 +1,4 @@
-### Run the following commands: 
+### Run the following commands to install: 
 
 ```bash
 
