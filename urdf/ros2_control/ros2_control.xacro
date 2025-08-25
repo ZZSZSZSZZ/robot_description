@@ -5,7 +5,7 @@
 
   <xacro:macro name="robot_ros2_control"
     params="use_fake_hardware:=^|true
-            fake_sensor_commands:=^|true
+            mock_sensor_commands:=^|true
             left_can_interface:=^|can0
             right_can_interface:=^|can1
             body_can_interface:=^|can2
@@ -16,7 +16,7 @@
       <hardware>
         <xacro:if value="${use_fake_hardware}">
           <plugin>fake_components/GenericSystem</plugin>
-          <param name="fake_sensor_commands">${fake_sensor_commands}</param>
+          <param name="mock_sensor_commands">${mock_sensor_commands}</param>
           <param name="state_following_offset">0.0</param>
         </xacro:if>
         <xacro:unless value="${use_fake_hardware}">
@@ -46,7 +46,7 @@
       <hardware>
         <xacro:if value="${use_fake_hardware}">
           <plugin>fake_components/GenericSystem</plugin>
-          <param name="fake_sensor_commands">${fake_sensor_commands}</param>
+          <param name="mock_sensor_commands">${mock_sensor_commands}</param>
           <param name="state_following_offset">0.0</param>
         </xacro:if>
         <xacro:unless value="${use_fake_hardware}">
@@ -76,7 +76,7 @@
       <hardware>
         <xacro:if value="${use_fake_hardware}">
           <plugin>fake_components/GenericSystem</plugin>
-          <param name="fake_sensor_commands">${fake_sensor_commands}</param>
+          <param name="mock_sensor_commands">${mock_sensor_commands}</param>
           <param name="state_following_offset">0.0</param>
         </xacro:if>
         <xacro:unless value="${use_fake_hardware}">

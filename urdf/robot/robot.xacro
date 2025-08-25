@@ -12,6 +12,7 @@
   <xacro:arg name="use_fake_hardware" default="true" />
   <xacro:arg name="left_can_interface" default="can0" />
   <xacro:arg name="right_can_interface" default="can1" />
+  <xacro:arg name="body_can_interface" default="can2" />
 
   <xacro:macro name="robot"
     params="
@@ -27,12 +28,12 @@
       hand_inertials
       hand_kinematics
       hand_kinematics_link
-      ros2_control:=false
-      can_interface:=''
       use_fake_hardware:=false
-      fake_sensor_commands:=false
-      left_can_interface:='can1'
-      right_can_interface:='can0'
+      mock_sensor_commands:=false
+      left_can_interface:='can0'
+      right_can_interface:='can1'
+      body_can_interface:='can2'
+      can_fd:=true
       ">
 
     <!-- body -->
@@ -81,7 +82,11 @@
     <!-- ros2_control hardware interfaces -->
     <xacro:robot_ros2_control
       use_fake_hardware="${use_fake_hardware}"
-      fake_sensor_commands="${fake_sensor_commands}" />
+      mock_sensor_commands="${mock_sensor_commands}"
+      left_can_interface="${left_can_interface}"
+      right_can_interface="${right_can_interface}"
+      body_can_interface="${body_can_interface}"
+      can_fd="${can_fd}"/>
 
   </xacro:macro>
 
@@ -101,5 +106,6 @@
     use_fake_hardware="$(arg use_fake_hardware)"
     left_can_interface="$(arg left_can_interface)"
     right_can_interface="$(arg right_can_interface)"
+    body_can_interface="${arg body_can_interface}"
     />
 </robot>
