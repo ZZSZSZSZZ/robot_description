@@ -106,6 +106,6 @@
     use_fake_hardware="$(arg use_fake_hardware)"
     left_can_interface="$(arg left_can_interface)"
     right_can_interface="$(arg right_can_interface)"
-    body_can_interface="${arg body_can_interface}"
+    body_can_interface="$(arg body_can_interface)"
     />
 </robot>
